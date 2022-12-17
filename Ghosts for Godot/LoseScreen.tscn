@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/Flashlight.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/JMH Typewriter-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://LoseScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Container/Flashlight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -47.9 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "shine"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Container/Flashlight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 21.0, -47.9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Container/Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 2 )
+
+[node name="LoseScreen" type="Node2D"]
+position = Vector2( 68, -15 )
+script = ExtResource( 3 )
+
+[node name="Container" type="Container" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Flashlight" type="Sprite" parent="Container"]
+position = Vector2( 132, 613 )
+rotation = -0.836013
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 300, 35 )
+
+[node name="Label" type="Label" parent="Container"]
+margin_left = 334.0
+margin_top = 287.0
+margin_right = 564.0
+margin_bottom = 351.0
+custom_fonts/font = SubResource( 1 )
+text = "You Died"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Container"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Container"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 2 )
+anims/shine = SubResource( 3 )
+
+[node name="Button" type="Button" parent="Container"]
+visible = false
+margin_left = 388.0
+margin_top = 368.0
+margin_right = 500.0
+margin_bottom = 395.0
+custom_fonts/font = SubResource( 4 )
+toggle_mode = true
+text = "Play Again?"
+
+[connection signal="pressed" from="Container/Button" to="." method="_on_Button_pressed"]

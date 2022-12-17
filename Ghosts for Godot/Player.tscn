@@ -1,0 +1,239 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Flashlight.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/JMH Typewriter-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/speechBubble.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/blackCover.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 5.0
+
+[sub_resource type="CanvasItemMaterial" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 1
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackCover2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 39, -446 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackCover:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 35, 453 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Flashlight:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player/Flashlight:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player/Flashlight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -61.9, 31.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player/Flashlight:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Flashlight:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "wakeUp"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackCover:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 2, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 35, 450 ), Vector2( 35, 480 ), Vector2( 35, 450 ), Vector2( 35, 550 ), Vector2( 35, 450 ), Vector2( 54, 1048 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackCover2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 2, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 39, -446 ), Vector2( 39, -470 ), Vector2( 39, -446 ), Vector2( 39, -600 ), Vector2( 39, -446 ), Vector2( 39, -1000 ) ]
+}
+
+[node name="Player" type="Node2D"]
+
+[node name="Player" type="KinematicBody2D" parent="." groups=["Player"]]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 3 )
+
+[node name="Flashlight" type="Light2D" parent="Player" groups=["FlashLight"]]
+position = Vector2( 160, 43 )
+scale = Vector2( 0.5, 1 )
+enabled = false
+texture = ExtResource( 2 )
+offset = Vector2( 4, -1 )
+
+[node name="Area2D" type="Area2D" parent="Player/Flashlight" groups=["Light"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player/Flashlight/Area2D"]
+position = Vector2( 2, 15 )
+polygon = PoolVector2Array( -226, -71, -226, -72, 252, -226, 330, -17, 204, 192, -294, -47 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+
+[node name="Timer" type="Timer" parent="Player"]
+
+[node name="Player" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+material = SubResource( 9 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -28.0
+margin_top = -62.0
+margin_right = 12.0
+margin_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+align = 1
+valign = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Label"]
+show_behind_parent = true
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 18.0
+margin_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 5 )
+
+[node name="BlackCover" type="Sprite" parent="."]
+position = Vector2( 35, 453 )
+scale = Vector2( 8, 3 )
+texture = ExtResource( 6 )
+
+[node name="BlackCover2" type="Sprite" parent="."]
+position = Vector2( 39, -446 )
+scale = Vector2( 8, 3 )
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/death = SubResource( 8 )
+anims/wakeUp = SubResource( 7 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Player/Player" to="Player" method="_on_Area2D_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]

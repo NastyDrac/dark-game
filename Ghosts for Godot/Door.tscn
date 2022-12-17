@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 19.2354
+
+[node name="Door" type="Node2D" groups=["Door"]]
+
+[node name="Door" type="Area2D" parent="." groups=["Door"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+shape = SubResource( 1 )

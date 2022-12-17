@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GhostClose.gd" type="Script" id=1]
+
+[node name="GhostClose" type="AudioStreamPlayer2D"]
+volume_db = 1.0
+script = ExtResource( 1 )
+
+[connection signal="finished" from="." to="." method="_on_GhostClose_finished"]
